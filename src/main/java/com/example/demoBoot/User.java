@@ -1,11 +1,11 @@
 package com.example.demoBoot;
-
+/*
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
+*/
 import java.util.Collection;
 
-public class User implements UserDetails {
+public class User/* implements UserDetails*/ {
 
     private String username;
 
@@ -18,7 +18,6 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-
     public String getPassword() {
         return password;
     }
@@ -26,14 +25,17 @@ public class User implements UserDetails {
     public void setPassword(String password) {
         this.password = password;
     }
+    public String getUsername() {
+        return this.username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+/*
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.username;
     }
 
     @Override
@@ -54,5 +56,5 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
+    }*/
 }

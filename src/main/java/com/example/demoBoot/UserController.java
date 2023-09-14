@@ -1,7 +1,6 @@
 package com.example.demoBoot;
 
-import com.example.demoBoot.JwtGenerator;
-import com.example.demoBoot.beans.Student;
+//import com.example.demoBoot.JwtGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
@@ -34,19 +34,21 @@ public class UserController {
     }
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody User user) {
-        //try {
-            /*if(user.getUsername() == null || user.getPassword() == null) {
+        try {
+            if(user.getUsername() == null || user.getPassword() == null) {
                 throw new UsernameNotFoundException("UserName or Password is Empty");
-            }*/
-            //User userData = users.stream().filter(u -> u.getUsername().equals(user.getUsername()) && u.getPassword().equals(user.getPassword())).findFirst().orElse(null);
-            User userData = new User("Bob", "1234");
-            /*if(userData == null){
-                System.out.println("Usuario no encontrado");
+            }
+            User userData = users.stream().filter(u -> u.getUsername().equals(user.getUsername()) && u.getPassword().equals(user.getPassword())).findFirst().orElse(null);
+
+            if(userData == null){
                 throw new UsernameNotFoundException("UserName or Password is Invalid");
-            }*/
-            return new ResponseEntity<>("test", HttpStatus.OK);
-       /* } catch (UsernameNotFoundException e) {
+            }
+
+            Map<String, String> token = jwtGenerator.generateToken(userData);
+
+            return new ResponseEntity<>(token, HttpStatus.OK);
+        } catch (UsernameNotFoundException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
-        } */
+        }
     }
 }
