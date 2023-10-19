@@ -13,6 +13,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin(maxAge = 3600)
 public class UserController {
     public static List<User> users = new ArrayList<User>();
     private JwtGenerator jwtGenerator;

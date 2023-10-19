@@ -17,12 +17,16 @@ public class JwtFilter extends GenericFilterBean {
         final HttpServletRequest request = (HttpServletRequest) servletRequest;
         final HttpServletResponse response = (HttpServletResponse) servletResponse;
         
-        /* Autenticacion * /
+        /* Autenticacion */
         final String authHeader = request.getHeader("authorization");
+        System.out.println("AuthHeader: " + authHeader); 
+        System.out.println("Method: " + request.getMethod());
+
         if ("OPTIONS".equals(request.getMethod())) {
             response.setStatus(HttpServletResponse.SC_OK);
             filterChain.doFilter(request, response);
         } else {
+            
             if(authHeader == null || !authHeader.startsWith("Bearer ")){
                 throw new ServletException("An exception occurred");
             }

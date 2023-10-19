@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(maxAge = 3600)
 public class StudentController {
     public static List<Student> students = new ArrayList<Student>();
 
@@ -21,6 +21,7 @@ public class StudentController {
     }
 
     @GetMapping("/students")
+    @CrossOrigin(origins = "http://localhost:3000")
     public List<Student> getStudents(){
         return students;
     }
@@ -58,6 +59,7 @@ public class StudentController {
         for (Student stud : students) {
             if (stud.getFirstname().equals(firstname)) {
                 students.remove(stud);
+                break;
             }
         }
     }
